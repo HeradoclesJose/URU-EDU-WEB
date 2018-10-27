@@ -1,0 +1,30 @@
+{
+  "name": "uru-edu",
+  "version": "1.0.0",
+  "description": "Small CMS made for the Rafael Urdaneta University using NodeJs, React, Redux and MongoDB.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node",
+    "University",
+    "Landing",
+    "React",
+    "CMS"
+  ],
+  "author": "@Heradocles & @Vocarlo",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "formidable": "^1.2.1",
+    "jwt-simple": "^0.5.5",
+    "mongoose": "^5.3.7",
+    "multer": "^1.4.1",
+    "nodemon": "^1.18.5",
+    "path": "^0.12.7"
+  }
+}
