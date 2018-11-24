@@ -1,0 +1,20 @@
+{
+  "db": {
+    "url": "mongodb://datuserdb:d1nfomasterkey@ds123361.mlab.com:23361/uruedudb"
+  },
+
+  "hashpassword": {
+    "password": "hashcrypt", "salt": "$2a$10$nGbo.FOZB9Chu1vUEmbAqOCDTG005pUtJRuc6TH1LkgZ9yZPZk/a6"
+  },
+
+  "secret": {
+    "token": "secrettokenforuru"
+  },
+
+  "pathcal": {
+    "pathofcal": "E:\\Archivos\\Projects\\URU.Edu\\URU-EDU-WEB\\public\\calendars\\"
+  },
+
+   "pathpen": { "pathofpen": "E:\\Archivos\\Projects\\URU.Edu\\URU-EDU-WEB\\public\\pensums\\"
+  }
+}

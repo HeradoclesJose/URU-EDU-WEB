@@ -1,8 +1,13 @@
 //modules
 const express = require('express');
-const path = require("path");
-const bodyParser = require('body-parser');
-const multer = require('multer');
+    path = require("path"),
+    bodyParser = require('body-parser'),
+    multer = require('multer'),
+    dbconnect = require('./db/dbconnection'),
+    dbinfo = require('./config/config.json');
+
+//Connection to Mlbas!
+dbconnect.query(dbinfo);
 
 //setting express
 var app = express();
@@ -12,8 +17,8 @@ app.use(express.static(__dirname + '/public'));
 //The use of the bodyParser constructor (app.use(bodyParser());) has been deprecated
 //Now is a middleware, so you have to call the methods separately...
 
-app.use(bodyParser.json({limit: "50mb"}));
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(bodyParser.json({limit: "15mb"}));
+app.use(bodyParser.urlencoded({limit: "15mb", extended: true, parameterLimit:50000}));
 
 
 //Allow CROSS-ORIGINS
@@ -25,11 +30,20 @@ app.use(function (req, res, next) {
 });
 
 //routes
-const login = require('./routes/login'),
+const signup = require('./routes/signup'),
+      login = require('./routes/login'),
+      files = require('./routes/files'),
+      users = require('./routes/users'),
+      rights = require('./routes/rights'),
+      news = require('./routes/news');
 
 //giving express access to routes
+signup(app);
 login(app);
-
+files(app);
+users(app);
+rights(app);
+news(app);
 
 //start the server
 app.listen(app.get('port'), function(){
