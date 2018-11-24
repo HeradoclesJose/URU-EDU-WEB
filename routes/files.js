@@ -14,7 +14,9 @@ module.exports = function (app) {
 
         form.parse(req, function (err, fields, files) {
 
-            if (fields.type == "calendar" && req.rights.calendar == true || fields.type == "pensum" && req.rights.pensums == true) {
+            console.log(req.rights.calendars + " " + fields.type)
+
+            if (fields.type == "calendar" && req.rights.calendars == true || fields.type == "pensum" && req.rights.pensums == true) {
 
                 var oldpath = files.photo.path;
 
@@ -63,6 +65,8 @@ module.exports = function (app) {
             pathoffiles = config.pathpen.pathofpen;
         }
 
+        console.log(req.query.type)
+
         fs.readdirSync(pathoffiles).forEach(file => {
             files.push(file)
         })
@@ -77,7 +81,7 @@ module.exports = function (app) {
 
         var pathoffiles = "";
 
-        if (fields.type == "calendar" && req.rights.calendar == true || fields.type == "pensum" && req.rights.pensums == true) {
+        if (req.body.type == "calendar" && req.rights.calendars == true || req.body.type == "pensum" && req.rights.pensums == true) {
 
             if (req.body.type == "calendar"){
                 pathoffiles = config.pathcal.pathofcal;

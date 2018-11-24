@@ -21,18 +21,19 @@ module.exports = function (app) {
                 else{
                     if(count >= 1){
                         console.log('Username already exist!');
-                        res
-                            .response ("User already exist")
-                            .status (418)
+                        return res.json({
+                            "response": "User already exists",
+                            "status": 418
+                        })
                     }else{
                         user.save(function (err) {
                             if (err) return console.error(err);
                             else {
                                 console.log('Done');
-                                res
-                                    .response ("User was created!")
-                                    .status (200)
-
+                                return res.json({
+                                    "response": "User was created!",
+                                    "status": 200
+                                })
                             }
                         });
                     }
@@ -40,9 +41,10 @@ module.exports = function (app) {
             });
 
         } else {
-            res
-                .response ("You dont have the rights to perform this action")
-                .status (403)
+            return res.json({
+                "response": "You dont have the rights to perform this action",
+                "status": 403
+            })
         }
 
     });

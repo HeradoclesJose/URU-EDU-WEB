@@ -9,6 +9,8 @@ module.exports = function (app) {
 
     app.post("/deleteuser", middleware.isAuthenticated, function (req, res) {
 
+        console.log(req.rights)
+
         if (req.rights.admin == true){
 
             var query = models.deleteOne({user: req.body.user});

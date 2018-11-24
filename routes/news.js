@@ -18,7 +18,7 @@ module.exports = function (app) {
 
     app.post("/deletenew", middleware.isAuthenticated, function (req, res) {
 
-        if (fields.type == "event" && req.rights.events == true  || fields.type == "new" && req.rights.news == true) {
+        if (req.body.type == "event" && req.rights.events == true  || req.body.type == "new" && req.rights.news == true) {
 
 
             var query = type(req.body.type).deleteOne({_id: req.body.id});
@@ -59,7 +59,7 @@ module.exports = function (app) {
 
     app.post("/updatenew", middleware.isAuthenticated, function (req, res) {
 
-        if (fields.type == "event" && req.rights.events == true  || fields.type == "new" && req.rights.news == true) {
+        if (req.body.type == "event" && req.rights.events == true  || req.body.type == "new" && req.rights.news == true) {
 
             var query = type(req.body.type).updateOne({_id: req.body.id}, {description: req.body.description, name: req.body.name, date: req.body.date, hour: req.body.hour});
 
@@ -83,7 +83,7 @@ module.exports = function (app) {
 
     app.post("/createnew", middleware.isAuthenticated, function (req, res) {
 
-        if (fields.type == "event" && req.rights.events == true  || fields.type == "new" && req.rights.news == true) {
+        if (req.body.type == "event" && req.rights.events == true  || req.body.type == "new" && req.rights.news == true) {
 
             var newEntry = type(req.body.type) ({name: req.body.name, description: req.body.description, date: req.body.date, hour: req.body.hour});
 
