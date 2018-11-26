@@ -16,5 +16,11 @@
   },
 
    "pathpen": { "pathofpen": "E:\\Archivos\\Projects\\URU.Edu\\URU-EDU-WEB\\public\\pensums\\"
+  },
+
+  "pathevents": { "pathevents": "E:\\Archivos\\Projects\\URU.Edu\\URU-EDU-WEB\\public\\events\\"
+  },
+
+  "pathnews": { "pathnews": "E:\\Archivos\\Projects\\URU.Edu\\URU-EDU-WEB\\public\\news\\"
   }
 }

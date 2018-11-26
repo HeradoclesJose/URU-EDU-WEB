@@ -1,0 +1,115 @@
+//Giving express access to route.
+module.exports = function (app) {
+
+    const  config = require('./../config/config.json'),
+        middleware = require('./../auth/IsAuth'),
+        formidable = require("formidable"),
+        fs = require('fs'),
+        path = require('path');
+
+
+    app.post("/photos", middleware.isAuthenticated, function (req, res) {
+
+        var form = new formidable.IncomingForm();
+
+        form.parse(req, function (err, fields, files) {
+
+            if (fields.type == "event" && req.rights.events == true || fields.type == "new" && req.rights.news == true) {
+
+                var oldpath = files.photo.path;
+
+                var newpath = "";
+
+                if (fields.type == "event"){
+                    newpath = config.pathevents.pathevents + fields.name + path.extname(files.photo.name);
+                } else {
+                    newpath = config.pathnews.pathnews + fields.name + path.extname(files.photo.name);
+                }
+
+                fs.rename(oldpath, newpath, function (err) {
+                    if (err) {
+                        throw err;
+                        return res.json({
+                            "response": "There was a problem with your request",
+                            "status": 418
+                        })
+                    }
+                    else {
+                        return res.json({
+                            "response": "File was uploaded",
+                            "status": 200
+                        })
+
+                    }
+                });
+            } else {
+                return res.json({
+                    "response": "You dont have rights to perfom this action",
+                    "status": 403
+                })
+            }
+        });
+    });
+
+    app.get("/getphotos", function (req, res) {
+
+        var files = [];
+        var pathoffiles = "";
+
+
+        if (req.query.type == "event"){
+            pathoffiles = config.pathevents.pathevents;
+        } else {
+            pathoffiles = config.pathnews.pathnews;
+        }
+
+        console.log(req.query.type)
+
+        fs.readdirSync(pathoffiles).forEach(file => {
+            files.push(file)
+        })
+
+        res
+            .status(200)
+            .send(files)
+
+    });
+
+    app.post("/deletephoto", middleware.isAuthenticated, function (req, res) {
+
+        var pathoffiles = "";
+
+        if (req.body.type == "event" && req.rights.events == true || req.body.type == "new" && req.rights.news == true) {
+
+            if (req.body.type == "event"){
+                pathoffiles = config.pathevents.pathevents;
+            } else {
+                pathoffiles = config.pathnews.pathnews;
+            }
+
+            fs.unlink(pathoffiles + req.body.file, (err) => {
+                if (err) {
+                    console.log(err)
+                    return res.json({
+                        "response": "There was a problem with your request",
+                        "status": 418
+                    })
+
+                } else {
+                    return res.json({
+                        "response": "Your request was processed ",
+                        "status": 200
+                    })
+
+                }
+
+            });
+
+        } else {
+            return res.json({
+                "response": "You dont have rights to perfom this action",
+                "status": 403
+            })
+        }
+    })
+}

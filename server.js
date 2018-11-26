@@ -35,7 +35,8 @@ const signup = require('./routes/signup'),
       files = require('./routes/files'),
       users = require('./routes/users'),
       rights = require('./routes/rights'),
-      news = require('./routes/news');
+      news = require('./routes/news'),
+      photos = require('./routes/photos');
 
 //giving express access to routes
 signup(app);
@@ -44,6 +45,7 @@ files(app);
 users(app);
 rights(app);
 news(app);
+photos(app);
 
 //start the server
 app.listen(app.get('port'), function(){
