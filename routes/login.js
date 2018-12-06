@@ -34,6 +34,8 @@ module.exports = function (app) {
                         res.json({
                             "response": "You are now logged in.",
                             "token": token,
+                            "user": user[0].user,
+                            "rights": user[0].rights,
                             "status": "200"})
                     }
                 });

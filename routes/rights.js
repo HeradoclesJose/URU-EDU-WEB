@@ -4,8 +4,6 @@ const mongoose = require('mongoose'),
     middleware = require('./../auth/IsAuth'),
     hash = require('../auth/hashpass');
 
-//TODO UPDATE AND DELETE USERS
-
 //Giving express access to route.
 module.exports = function (app) {
 

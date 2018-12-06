@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 module.exports = {
-        query: (dbinfo) => {
+        connect: (dbinfo) => {
 
             //Setting the DB's default connection (because the old way its still allowed, we need to use the new url parser manually to avoid some bugs)
             mongoose.connect(dbinfo.db.url, { useNewUrlParser: true, poolSize: 6, keepAlive: true, keepAliveInitialDelay: 300000 });

@@ -7,7 +7,7 @@ const express = require('express');
     dbinfo = require('./config/config.json');
 
 //Connection to Mlbas!
-dbconnect.query(dbinfo);
+dbconnect.connect(dbinfo);
 
 //setting express
 var app = express();
@@ -23,10 +23,10 @@ app.use(bodyParser.urlencoded({limit: "15mb", extended: true, parameterLimit:500
 
 //Allow CROSS-ORIGINS
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', "POST, GET, PUT, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+res.header("Access-Control-Allow-Origin", "*");
+res.header('Access-Control-Allow-Methods', "POST, GET, PUT, DELETE, OPTIONS");
+res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+next();
 });
 
 //routes
@@ -51,4 +51,5 @@ photos(app);
 app.listen(app.get('port'), function(){
     console.log('Express server () listening on localhost:' + app.get('port'));
 });
+
 
